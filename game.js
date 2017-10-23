@@ -1,8 +1,52 @@
+var pocetniSmer = 0;
+var level = sessionStorage.getItem("level");
+    if (level === null) {level = 1;}
+console.log(level);
+/* modal */
+
+// Get the modal
+var modal = document.getElementById('myModal');
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+/* (x) */
+span.onclick = function modall() {
+    modal.style.display = "none";
+}
+/* NOTIFIKACIJA O PORAZU */
+var openLost = function() {
+    modal.style.display = "block";
+	document.getElementById("modalInfo").innerHTML = "YOU HAVE LOST. . .";
+	document.getElementById("scoreNote").innerHTML = score + "" +"<p style='display: inline-block; font-size: 12px;'> Brix</p>";
+	document.getElementById("continue").style.display = "none";
+	document.getElementById("retry").autofocus = true;
+}
+
+
+/* NOTIFIKACIJA O POBEDI */
+var openWin = function() {
+    modal.style.display = "block";
+	document.getElementById("modalInfo").innerHTML = "CONGRATS! YOU WON!";
+	document.getElementById("scoreNote").innerHTML = score + "" +"<p style='display: inline-block; font-size: 12px;'> Brix</p>";
+	document.getElementById("continue").style.display = "inline-block";
+	document.getElementById("continue").autofocus = true;
+}
+	
+/* GASENJE MODALA KLIKOM NA OKOLINU */
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
 var colorr=[];
 colorr[0] = "red";
 colorr[1] = "blue";
 colorr[2] = "green";
-colorr[3] = "#fc3";
+colorr[3] = "gold";
 colorr[4] = "gray";
 colorr[5] = "black";
 colorr[6] = "orange";
@@ -17,6 +61,8 @@ var f=0;
 
 var canvas=document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
+
+if (level == 1) {
 var ballRadius=10;
 
 
@@ -25,7 +71,7 @@ var dx=2;
 var y=canvas.height-30;
 var dy=-2;
 var paddleHeight=10;
-var paddleWidth=150;
+var paddleWidth=120;
 var paddleXposition=(canvas.width-paddleWidth)/2;
 var rightPressed= false;
 var leftPressed=false;
@@ -38,6 +84,150 @@ var bHeight = 40;
 var bPadding = 20;
 var bOffsetTop = 45;
 var bOffsetLeft = 65;
+}
+
+if (level == 2) {
+var ballRadius=12;
+
+
+var x=canvas.width/2;
+var dx=3;
+var y=canvas.height-30;
+var dy=-3;
+var paddleHeight=10;
+var paddleWidth=130;
+var paddleXposition=(canvas.width-paddleWidth)/2;
+var rightPressed= false;
+var leftPressed=false;
+
+
+var brickColumnCount = 5;
+var brickRowCount = 7;
+var bWidth = 90;
+var bHeight = 40;
+var bPadding = 20;
+var bOffsetTop = 45;
+var bOffsetLeft = 30;
+}
+
+if (level == 3) {
+var ballRadius=15;
+
+
+var x=canvas.width/2;
+var dx=4;
+var y=canvas.height-30;
+var dy=-4;
+var paddleHeight=10;
+var paddleWidth=140;
+var paddleXposition=(canvas.width-paddleWidth)/2;
+var rightPressed= false;
+var leftPressed=false;
+
+
+var brickColumnCount = 7;
+var brickRowCount = 7;
+var bWidth = 80;
+var bHeight = 40;
+var bPadding = 20;
+var bOffsetTop = 45;
+var bOffsetLeft = 70;
+}
+if (level == 4) {
+var ballRadius=15;
+
+
+var x=canvas.width/2;
+var dx=6;
+var y=canvas.height-30;
+var dy=-6;
+var paddleHeight=10;
+var paddleWidth=140;
+var paddleXposition=(canvas.width-paddleWidth)/2;
+var rightPressed= false;
+var leftPressed=false;
+
+
+var brickColumnCount = 4;
+var brickRowCount = 7;
+var bWidth = 80;
+var bHeight = 40;
+var bPadding = 20;
+var bOffsetTop = 45;
+var bOffsetLeft = 70;
+}
+
+if (level == 5) {
+var ballRadius=15;
+
+
+var x=canvas.width/2;
+var dx=6;
+var y=canvas.height-30;
+var dy=-6;
+var paddleHeight=10;
+var paddleWidth=100;
+var paddleXposition=(canvas.width-paddleWidth)/2;
+var rightPressed= false;
+var leftPressed=false;
+
+
+var brickColumnCount = 3;
+var brickRowCount = 7;
+var bWidth = 80;
+var bHeight = 40;
+var bPadding = 20;
+var bOffsetTop = 45;
+var bOffsetLeft = 70;
+}
+
+if (level == 6) {
+var ballRadius=18;
+
+
+var x=canvas.width/2;
+var dx=6.5;
+var y=canvas.height-30;
+var dy=-6.5;
+var paddleHeight=10;
+var paddleWidth=90;
+var paddleXposition=(canvas.width-paddleWidth)/2;
+var rightPressed= false;
+var leftPressed=false;
+
+
+var brickColumnCount = 3;
+var brickRowCount = 7;
+var bWidth = 80;
+var bHeight = 40;
+var bPadding = 20;
+var bOffsetTop = 45;
+var bOffsetLeft = 70;
+}
+
+if (level == 7) {
+var ballRadius=30;
+
+
+var x=canvas.width/2;
+var dx=0.5;
+var y=canvas.height-30;
+var dy=-0.5;
+var paddleHeight=10;
+var paddleWidth=90;
+var paddleXposition=(canvas.width-paddleWidth)/2;
+var rightPressed= false;
+var leftPressed=false;
+
+
+var brickColumnCount = 1;
+var brickRowCount = 1;
+var bWidth = 600;
+var bHeight = 200;
+var bPadding = 20;
+var bOffsetTop = 45;
+var bOffsetLeft = 105;
+}
 
 document.addEventListener("mousemove", mouseMoveHandler, false);
 document.addEventListener("keydown",keyDownHandler, false);
@@ -84,13 +274,19 @@ function collisionDetection() {
             if(b.status == 1) {
                 if(x > b.x && x < b.x+bWidth && y > b.y && y < b.y+bHeight) {
                     dy = -dy;
-						dx = 0.8*dx;
                     b.status = 0;
 					ggg = Math.random()*7 <<0;
                     score++;
                     if(score == brickRowCount*brickColumnCount) {
-                        setInterval(alert("YOU WIN, CONGRATS!"),1000);
-                        document.location.reload();
+						dx=0;
+						dy=0;
+                        openWin();												/* WIN */
+						level++;
+                        window.onbeforeunload = function() {
+						sessionStorage.setItem("level", level);
+						console.log(level)
+						}
+						
                     }
                 }
             }
@@ -107,10 +303,11 @@ function drawBall() {
     ctx.closePath();
 	
 }
-
+/* pomerajuca plocica */
 function drawPaddle() {
     ctx.beginPath();
     ctx.rect(paddleXposition, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+	ctx.strokeRect(paddleXposition-0.6, canvas.height-paddleHeight-0.6, paddleWidth+0.5, paddleHeight);
     ctx.fillStyle = colorr[ggg-1];
     ctx.fill();
     ctx.closePath();
@@ -139,19 +336,24 @@ function Score() {
     ctx.fillStyle = "#0095DD";
     ctx.fillText("Score: "+score, 10, 20);
 }
-/*generalna fja*/
+function stageLevel() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Level: "+ level, 740, 20);
+}
+/*generalna fja za crtanje na ekranu*/
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBricks();
     drawBall();
     drawPaddle();
     Score();
+	stageLevel();
     collisionDetection();
 	
 	/*ogranicenja*/
     
     if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-		dx=1.6*dx;
         dx = -dx;
 	
     }
@@ -162,23 +364,14 @@ function draw() {
     else if(y + dy > canvas.height-ballRadius) {
         if(x > paddleXposition - ballRadius/2 && x < paddleXposition + paddleWidth + ballRadius/2) {
             dy = -dy;
-			if (leftPressed) {
-			
-			dx = 1.3*dx;
-			}
-		if (rightPressed) {
-			
-			dx = 1.3*dx;
-			}
-		else {
-		x += dx;	
-		}
 
         }
         else {
-		document.location.reload();
-           alert("GAME OVER"); /* ako prodje dole */
+			x=-10;
+			y=-10;
+			openLost(); 							/* LOST */
 			
+
         }
     }
     /*pomeranje ploce*/
@@ -188,10 +381,22 @@ function draw() {
     else if(leftPressed && paddleXposition > 0) {
         paddleXposition -= 7;
     }
+	/* POCETNI ODZIV LOPTE, PRVI POKRET */
     if (flag == 1 || leftPressed || rightPressed) {
+		if (pocetniSmer == 0) {
+			setInterval( function() {
+				if (pocetniSmer == 0 && paddleXposition + paddleWidth/2 < canvas.width/2 ) {
+					dx = dx*(-1);
+					pocetniSmer = 1;}
+				},1);
+			setInterval( function() {
+				if (pocetniSmer == 0 && paddleXposition + paddleWidth/2 > canvas.width/2 ) {
+					dx = dx*(1);
+					pocetniSmer = 1;}
+				},1);}
 
 		x += dx;
-		y += dy;
+		y += dy - 0.0015*paddleXposition;
 	}
 	else {
 		x = paddleXposition + paddleWidth/2;
@@ -208,5 +413,6 @@ function play() {
 
 setInterval(draw,10);
 console.log(flag);
+
 
 

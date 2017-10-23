@@ -2,6 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="game.css" rel="stylesheet">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <title>BRIX</title>
     <style>
     	* { padding: 0; margin: 0; }
@@ -10,9 +14,28 @@
 </head>
 <body style="background-color: #a8afa;">
 <div style="border: 15px dashed black; position:absolute; top:0; left:0; bottom:0; right:0;">
-<h1 style="text-align:center;  margin-bottom: -80px; margin-top: -10px; padding-top: 20px; color: #fc3; text-shadow: 2px 2px 1px black;">BRIX GAME ONLINE</h1>
+<h1 style="text-align:center;  margin-bottom: -80px; margin-top: -10px; padding-top: 15px; padding-bottom: 5px; color: #fc3; text-shadow: 2px 2px 1px black;">BRIX GAME ONLINE</h1>
 <canvas id="myCanvas" width="810" height="540" style="margin-top: 70px; position: relative; top: 10px; border: 2px solid #ccc; background: radial-gradient(#e1e1e1, #c2c2c5, #ccce00,#44ffcc);"></canvas>
 </div>
+
+
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+	<div class="modal-content container" id="btns">
+		<span class="close">&times;</span>
+		<p id="modalInfo">BRIX GAME RESULT :</p><br>
+		<p>Your score:</p>
+		<h1 id="scoreNote" style="margin-left: 20px;"></h1>
+		<ul class="list-inline">
+		<li class="list-inline-item"><button class="btn btn-danger" id="retry" onclick ="location.reload();">Retry</button></li>
+		<li class="list-inline-item"><button class="btn btn-success" id="continue" onclick ="location.reload();">Next lvl</button></div></li>
+		</ul>
+		</div>
+	
+
+</div>
+
 <script src="game.js"></script>
 
 </body>
